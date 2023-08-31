@@ -1,0 +1,67 @@
+# Package Overview
+package_name: sentiment_model
+
+model_name: sentiment_model
+model_save_file: sentiment__model_output_v
+tokenizer_save_file: sentiment_tokenizer_v
+
+# Data Files
+training_data_file: https://cdn.iisc.talentsprint.com/AIandMLOps/MiniProjects/Datasets/Reviews.csv
+
+# Variables
+# The variable we are attempting to predict (cnt)
+target: Sentiment
+
+# Features to drop before pipeline
+unused_fields:  
+  - Id
+  - ProductId
+  - UserId
+  - ProfileName
+  - HelpfulnessNumerator
+  - HelpfulnessDenominator
+  - Time
+  - Score
+  - Summary
+
+# Features names
+score_var: Score
+reviewtext_var: Text
+sentiment_var: Sentiment
+
+
+# Mappings for Ordinal categorical features
+sentiment_mappings: 
+  0: negative
+  1: positive
+
+# Set train/test split
+test_size: 0.40
+val_size: 0.5
+shuffle: False
+
+# Set the random seed
+random_state: 42
+
+# Feature engineering parameters
+num_words: 50000
+max_review_length: 400
+truncating_type: 'post'
+padding_type: 'post'
+
+# Alogrithm parameters
+top_words: 50000
+embedding_vector_length: 32
+mask_zero: True
+lstm_layer_dim: 100
+dense_layer_dim: 1
+activation: sigmoid
+epochs: 1
+batch_size: 64
+optimizer: adam
+loss: binary_crossentropy
+accuracy_metric: accuracy
+verbose: 1
+earlystop: 0
+monitor: val_loss
+save_best_only: True
